@@ -4,4 +4,10 @@ jaffle_shop:
   outputs:
     dev:
       type: duckdb
+      schema: dev_sung
+      path: 'jaffle_shop.duckdb'
+
+    prod:
+      type: duckdb
+      schema: prod_sung
       path: 'jaffle_shop.duckdb'
