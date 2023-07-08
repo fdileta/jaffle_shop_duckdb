@@ -11,3 +11,4 @@ env/
 **/*.duckdb.wal
 
 datafold-vscode-0.0.4.vsix
+.env

@@ -27,5 +27,5 @@ models:
       materialized: view
 vars:
   data_diff:
-    prod_database: jaffle_shop
+    prod_database: md:jaffle_shop
     prod_schema: prod_sung
