@@ -19,6 +19,12 @@ jaffle_shop:
       schema: insane_o_style
       path: 'md:jaffle_shop'
       threads: 16
+      extensions:
+        - httpfs
+      settings:
+        s3_region: us-west-1
+        s3_access_key_id: "{{ env_var('S3_ACCESS_KEY_ID') }}"
+        s3_secret_access_key: "{{ env_var('S3_SECRET_ACCESS_KEY') }}"
 
     neon:
       type: postgres
