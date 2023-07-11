@@ -13,3 +13,9 @@ jaffle_shop:
       schema: prod_sung
       path: 'md:jaffle_shop'
       threads: 16
+
+    insane_o_style:
+      type: duckdb
+      schema: insane_o_style
+      path: 'md:jaffle_shop'
+      threads: 16
