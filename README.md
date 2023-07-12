@@ -1,6 +1,83 @@
-## Testing dbt project: `jaffle_shop`
+# Motherduck Demo
 
 `jaffle_shop` is a fictional ecommerce store. This dbt project transforms raw data from an app database into a customers and orders model ready for analytics.
+
+
+### Let's get started!
+
+> Note: I leave out detailed steps in uploading csv files. I simply uploaded the seed csv files in this dbt project and played around with it on neon.
+
+1. Setup your neon account: https://neon.tech/docs/tutorial/project-setup
+2. Setup your S3 bucket: https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html
+3. Setup your motherduck account: https://motherduck.com/
+
+Set your environment variables:
+
+```shell
+# all examples are fake
+export motherduck_token=<your motherduck token> # aouiweh98229g193g1rb9u1
+export NEON_PROJECT_ID=<your project id # empty-grass-954313
+export NEON_API_KEY=<your api key> # hauwef9821371
+export HOST=<host url> # ep-shrill-meadow-043325-pooler.us-west-2.aws.neon.tech
+export ROLE=<username> # sungwonchung3
+export PASSWORD=<passowrd> # aweufhawoi
+export DBNAME=neondb
+
+export S3_ACCESS_KEY_ID=<your access key id> # haoiwehfpoiahpwohf
+export S3_SECRET_ACCESS_KEY=<your secret access key> # jiaowhefa998333
+```
+
+Update your `profiles.yml` file:
+
+```yaml
+jaffle_shop:
+
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      schema: dev_sung # update this for your own schema
+      path: 'jaffle_shop.duckdb'
+      threads: 16
+
+    prod:
+      type: duckdb
+      schema: prod_sung # update this for your own schema
+      path: 'md:jaffle_shop'
+      threads: 16
+
+    insane_o_style:
+      type: duckdb
+      schema: insane_o_style
+      path: 'md:jaffle_shop'
+      threads: 16
+      extensions:
+        - httpfs
+      settings:
+        s3_region: us-west-1 # update this for your own AWS region
+        s3_access_key_id: "{{ env_var('S3_ACCESS_KEY_ID') }}"
+        s3_secret_access_key: "{{ env_var('S3_SECRET_ACCESS_KEY') }}"
+      plugins:
+        - module: postgres
+          config:
+            dsn: "dbname={{ env_var('DBNAME') }} user={{ env_var('ROLE') }} host={{ env_var('HOST') }} password={{ env_var('PASSWORD') }} port=5432"
+            source_schema: dbt_sung_dev # update this for your own schema
+            sink_schema: plugin_postgres
+            overwrite: true
+```
+
+Run it all:
+
+```shell
+python3 -m venv venv
+source venv/bin/activate
+python3 -m pip install --upgrade pip
+python3 -m pip install -r requirements.txt
+source venv/bin/activate
+dbt build -t insane_o_style
+```
+
+> Note: the rest of this is the original README.md file from the dbt-labs/jaffle_shop_duckdb repo
 
 ### What is this repo?
 What this repo _is_:
