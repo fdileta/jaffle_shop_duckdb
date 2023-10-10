@@ -1,0 +1,8 @@
+schedules:
+  - name: daily_run
+    schedule: "@daily"
+    environment: production
+    commands:
+      - dbt seed
+      - dbt run
+    owner_email: fabio@paradime.io
