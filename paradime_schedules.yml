@@ -6,3 +6,4 @@ schedules:
       - dbt seed
       - dbt run
     owner_email: fabio@paradime.io
+    git_branch: dev-duck
