@@ -4,7 +4,7 @@ with source as (
     Normally we would select from the table here, but we are using seeds to load
     our data in this project
     #}
-    select * from {{ ref('raw_payments') }}
+    select * from {{ custom_source( 'raw', 'raw_payments', "'"'https://duck-db-demo.s3.eu-west-2.amazonaws.com/raw_orders.csv'"'"  ) }}
 
 ),
 
