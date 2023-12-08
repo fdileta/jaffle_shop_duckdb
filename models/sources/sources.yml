@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: RAW
+    tables:
+      - name: RAW_CUSTOMERS
+      - name: RAW_ORDERS
+      - name: RAW_PAYMENTS
