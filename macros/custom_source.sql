@@ -3,7 +3,7 @@
     {% if target.name == 'duckdb' %}
         {{ s3_path }}
     {% else %}
-        {{ ref(source_name, table_name) }}
+        {{ source(source_name, table_name) }}
     {% endif %}
 
 {% endmacro %}
